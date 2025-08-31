@@ -1,0 +1,1313 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   EditFlow - YouTube Video Editor &amp; Voice-Over Specialist
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: "Inter", sans-serif;
+      background-color: #0f121a;
+      color: white;
+    }
+    /* Header shrink on scroll */
+    header {
+      transition: all 0.3s ease;
+      background-color: rgba(15, 18, 26, 0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    header.shrink {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    }
+    header .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    header .logo img {
+      width: 28px;
+      height: 28px;
+    }
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      color: white;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: white;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: #a5b4fc;
+      outline: none;
+    }
+    nav ul li a:hover::after,
+    nav ul li a:focus::after {
+      width: 100%;
+    }
+    .btn-hire {
+      background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      transition: filter 0.3s ease;
+      white-space: nowrap;
+    }
+    .btn-hire:hover,
+    .btn-hire:focus {
+      filter: brightness(1.15);
+      outline: none;
+    }
+    /* Hero Section */
+    .hero {
+      max-width: 900px;
+      margin: 3rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: linear-gradient(135deg, #6b21a8, #2563eb);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(101, 33, 255, 0.6);
+      position: relative;
+      color: white;
+    }
+    .hero-left,
+    .hero-right {
+      flex: 1 1 320px;
+      padding: 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-left h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .hero-left .social-proof {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      user-select: none;
+      flex-wrap: wrap;
+    }
+    .hero-left .social-proof span {
+      font-size: 0.875rem;
+      color: #d1d5db;
+      white-space: nowrap;
+    }
+    .hero-left .social-logos {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .hero-left .social-logos img {
+      height: 28px;
+      width: auto;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.7));
+      transition: filter 0.3s ease;
+    }
+    .hero-left .social-logos img:hover,
+    .hero-left .social-logos img:focus {
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1));
+      outline: none;
+    }
+    .hero-left .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary,
+    .btn-secondary {
+      padding: 0.75rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1.125rem;
+      cursor: pointer;
+      user-select: none;
+      border: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+      color: white;
+      box-shadow: 0 0 12px #8b5cf6;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      filter: brightness(1.15);
+      box-shadow: 0 0 20px #8b5cf6;
+      outline: none;
+    }
+    .btn-secondary {
+      background: rgba(255 255 255 / 0.15);
+      color: white;
+      font-size: 1rem;
+      gap: 0.5rem;
+    }
+    .btn-secondary:hover,
+    .btn-secondary:focus {
+      background: rgba(255 255 255 / 0.3);
+      outline: none;
+    }
+    /* Hero right demo reel */
+    .hero-right video,
+    .hero-right img {
+      width: 100%;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+      user-select: none;
+    }
+    /* Organic shapes */
+    .organic-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      animation: drift 10s ease-in-out infinite;
+      z-index: 1;
+    }
+    .organic-left {
+      width: 160px;
+      height: 160px;
+      background: #84cc16;
+      bottom: 0;
+      left: 0;
+      animation-name: driftLeft;
+    }
+    .organic-right {
+      width: 200px;
+      height: 200px;
+      background: #7c3aed;
+      bottom: 0;
+      right: 0;
+      animation-name: driftRight;
+    }
+    @keyframes driftLeft {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translate(-15px, 10px);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(0, 0);
+        opacity: 0.7;
+      }
+    }
+    @keyframes driftRight {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translate(15px, -10px);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(0, 0);
+        opacity: 0.7;
+      }
+    }
+    /* Neon glow ripple effect on buttons */
+    .btn-primary:hover,
+    .btn-primary:focus {
+      box-shadow:
+        0 0 8px #8b5cf6,
+        0 0 20px #8b5cf6,
+        0 0 30px #8b5cf6,
+        0 0 40px #8b5cf6;
+    }
+    .btn-secondary:hover,
+    .btn-secondary:focus {
+      box-shadow:
+        0 0 6px rgba(255 255 255 / 0.7),
+        0 0 12px rgba(255 255 255 / 0.5);
+    }
+    /* Fade in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+      animation-duration: 1s;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Services Section */
+    .services {
+      max-width: 900px;
+      margin: 4rem auto 0;
+      padding: 0 1rem;
+    }
+    .services h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      user-select: none;
+      text-align: center;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: #1a1f2e;
+      border: 2px solid transparent;
+      border-radius: 1rem;
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .service-card:hover,
+    .service-card:focus-within {
+      border-color: #8b5cf6;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #8b5cf6;
+      outline: none;
+    }
+    .service-icon {
+      font-size: 3rem;
+      color: #8b5cf6;
+      margin-bottom: 1rem;
+    }
+    .service-title {
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+      color: #a78bfa;
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      color: #d1d5db;
+      line-height: 1.3;
+    }
+    /* Portfolio Section */
+    .portfolio {
+      max-width: 900px;
+      margin: 4rem auto 0;
+      padding: 0 1rem;
+    }
+    .portfolio h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      user-select: none;
+      text-align: center;
+    }
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+    .filter-chip {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 2px solid #6b21a8;
+      background: transparent;
+      color: #a78bfa;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .filter-chip.active,
+    .filter-chip:hover,
+    .filter-chip:focus {
+      background: #6b21a8;
+      color: white;
+      outline: none;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .portfolio-card {
+      background: #1a1f2e;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .portfolio-card:hover,
+    .portfolio-card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px #8b5cf6;
+      outline: none;
+      z-index: 10;
+    }
+    .portfolio-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid #2c2f3a;
+    }
+    .portfolio-info {
+      padding: 1rem 1rem 1.25rem;
+      color: white;
+    }
+    .portfolio-title {
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+    .portfolio-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #a78bfa;
+    }
+    .badge {
+      background: #6b21a8;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      user-select: none;
+      white-space: nowrap;
+    }
+    /* Video preview on hover */
+    .portfolio-card video {
+      width: 100%;
+      height: auto;
+      display: none;
+      border-bottom: 1px solid #2c2f3a;
+      border-radius: 0;
+    }
+    .portfolio-card:hover video,
+    .portfolio-card:focus-within video {
+      display: block;
+    }
+    .portfolio-card:hover img,
+    .portfolio-card:focus-within img {
+      display: none;
+    }
+    /* Testimonials Section */
+    .testimonials {
+      max-width: 900px;
+      margin: 4rem auto 0;
+      padding: 0 1rem;
+      user-select: none;
+    }
+    .testimonials h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .testimonial-slider {
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial-slide {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1rem 2rem;
+      color: #e0e7ff;
+      font-style: italic;
+      font-size: 1.125rem;
+      line-height: 1.4;
+      min-height: 180px;
+    }
+    .testimonial-slide.active {
+      display: flex;
+      animation: fadeIn 0.8s ease forwards;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .testimonial-author {
+      margin-top: 1.25rem;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #a5b4fc;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .testimonial-author img {
+      width: 48px;
+      height: 48px;
+      border-radius: 9999px;
+      object-fit: cover;
+      box-shadow: 0 0 8px #8b5cf6;
+    }
+    /* Carousel arrows */
+    .testimonial-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(75, 0, 130, 0.7);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .testimonial-arrow:hover,
+    .testimonial-arrow:focus {
+      background: #8b5cf6;
+      outline: none;
+    }
+    .testimonial-arrow.left {
+      left: 0.5rem;
+    }
+    .testimonial-arrow.right {
+      right: 0.5rem;
+    }
+    /* Pricing Section */
+    .pricing {
+      max-width: 900px;
+      margin: 4rem auto 0;
+      padding: 0 1rem;
+      user-select: none;
+    }
+    .pricing h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+    .pricing-card {
+      background: #1a1f2e;
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .pricing-card.popular {
+      border: 3px solid #8b5cf6;
+      box-shadow: 0 0 30px #8b5cf6;
+      position: relative;
+      z-index: 10;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 30px #8b5cf6;
+      }
+      50% {
+        box-shadow: 0 0 40px #a78bfa;
+      }
+    }
+    .pricing-card:hover,
+    .pricing-card:focus-within {
+      transform: translateY(-8px);
+      box-shadow: 0 0 40px #8b5cf6;
+      outline: none;
+      z-index: 20;
+    }
+    .pricing-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #a78bfa;
+    }
+    .pricing-price {
+      font-weight: 800;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+      width: 100%;
+      color: #d1d5db;
+      font-size: 0.95rem;
+    }
+    .pricing-features li {
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .pricing-features li i {
+      color: #8b5cf6;
+      min-width: 18px;
+      text-align: center;
+    }
+    .btn-select {
+      background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+      padding: 0.75rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: white;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      transition: filter 0.3s ease;
+      width: 100%;
+      max-width: 220px;
+      text-align: center;
+    }
+    .btn-select:hover,
+    .btn-select:focus {
+      filter: brightness(1.15);
+      outline: none;
+    }
+    /* Contact Section */
+    .contact {
+      max-width: 600px;
+      margin: 4rem auto 4rem;
+      padding: 0 1rem;
+      user-select: none;
+    }
+    .contact h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: #cbd5e1;
+    }
+    input,
+    textarea {
+      background: #1a1f2e;
+      border: 1.5px solid #374151;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      color: white;
+      font-size: 1rem;
+      resize: vertical;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input:focus,
+    textarea:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 8px #8b5cf6;
+      outline: none;
+    }
+    button[type="submit"] {
+      background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+      padding: 0.75rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: white;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      transition: filter 0.3s ease;
+      max-width: 220px;
+      align-self: center;
+    }
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      filter: brightness(1.15);
+      outline: none;
+    }
+    /* Footer */
+    footer {
+      background: #12151f;
+      padding: 2rem 1rem;
+      color: white;
+      user-select: none;
+    }
+    footer .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+    }
+    footer .footer-col {
+      flex: 1 1 200px;
+      min-width: 180px;
+    }
+    footer .footer-col h3 {
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+    }
+    footer .footer-col p,
+    footer .footer-col a {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    footer .footer-col a:hover,
+    footer .footer-col a:focus {
+      color: #8b5cf6;
+      outline: none;
+    }
+    footer .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    footer .social-icons a {
+      font-size: 1.5rem;
+      color: #cbd5e1;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    footer .social-icons a:hover,
+    footer .social-icons a:focus {
+      color: #8b5cf6;
+      transform: scale(1.1);
+      outline: none;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+      }
+      nav ul {
+        display: none;
+      }
+      header .container {
+        justify-content: space-between;
+      }
+    }
+  </style>
+ </head>
+ <body>
+  <!-- Header & Navigation -->
+  <header aria-label="Primary site navigation" id="header" role="banner">
+   <div class="container">
+    <a aria-label="EditFlow homepage" class="logo" href="#">
+     <img alt="EditFlow logo icon with letter E" aria-hidden="true" focusable="false" height="28" src="https://storage.googleapis.com/a1aa/image/7052d929-f947-4de3-f55b-ed7a0cec1eb9.jpg" width="28"/>
+     EditFlow
+    </a>
+    <nav aria-label="Primary navigation links" role="navigation">
+     <ul>
+      <li>
+       <a href="#services" tabindex="0">
+        Services
+       </a>
+      </li>
+      <li>
+       <a href="#portfolio" tabindex="0">
+        Portfolio
+       </a>
+      </li>
+      <li>
+       <a href="#pricing" tabindex="0">
+        Pricing
+       </a>
+      </li>
+      <li>
+       <a href="#about" tabindex="0">
+        About
+       </a>
+      </li>
+      <li>
+       <a href="#contact" tabindex="0">
+        Contact
+       </a>
+      </li>
+     </ul>
+    </nav>
+    <a class="btn-hire" href="#contact" tabindex="0">
+     Hire Me
+    </a>
+   </div>
+  </header>
+  <!-- Hero Section -->
+  <section aria-label="Hero section with value proposition and demo reel" class="hero">
+   <div aria-hidden="true" class="organic-shape organic-left">
+   </div>
+   <div aria-hidden="true" class="organic-shape organic-right">
+   </div>
+   <div class="hero-left fade-in" style="animation-delay: 0.2s;">
+    <h1>
+     YouTube Videos &amp; Voice Overs That Keep Viewers Hooked
+    </h1>
+    <div aria-label="Trusted by YouTubers and Creators" class="social-proof">
+     <div class="social-logos" role="list">
+      <img alt="YouTube logo" role="listitem" src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" tabindex="-1"/>
+      <img alt="Instagram logo" role="listitem" src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" tabindex="-1"/>
+      <img alt="TikTok logo" role="listitem" src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" tabindex="-1"/>
+     </div>
+     <span>
+      Trusted by YouTubers &amp; Creators
+     </span>
+    </div>
+    <div class="cta-buttons">
+     <button aria-label="Start editing now" class="btn-primary" type="button">
+      Start Editing Now
+     </button>
+     <button aria-label="Watch demo reel" class="btn-secondary" type="button">
+      <i aria-hidden="true" class="fas fa-film" style="margin-right: 0.5rem;">
+      </i>
+      🎬 Watch Demo Reel
+     </button>
+    </div>
+   </div>
+   <div class="hero-right fade-in" style="animation-delay: 0.4s;">
+    <video aria-label="Demo reel video showcasing editing work" autoplay="" loop="" muted="" playsinline="" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm">
+    </video>
+   </div>
+  </section>
+  <!-- Services Section -->
+  <section aria-labelledby="services-title" class="services" id="services">
+   <h2 id="services-title">
+    What I Can Do For You
+   </h2>
+   <div class="service-grid">
+    <article aria-label="Full Video Production service" class="service-card" tabindex="0">
+     <i aria-hidden="true" class="fas fa-film service-icon">
+     </i>
+     <h3 class="service-title">
+      Full Video Production
+     </h3>
+     <p class="service-desc">
+      From raw footage to a polished, ready-to-upload video.
+     </p>
+    </article>
+    <article aria-label="Audio Cleanup and Mixing service" class="service-card" tabindex="0">
+     <i aria-hidden="true" class="fas fa-microphone-alt service-icon">
+     </i>
+     <h3 class="service-title">
+      Audio Cleanup &amp; Mixing
+     </h3>
+     <p class="service-desc">
+      Clear, professional voice-overs and sound quality.
+     </p>
+    </article>
+    <article aria-label="Color Grading and Effects service" class="service-card" tabindex="0">
+     <i aria-hidden="true" class="fas fa-palette service-icon">
+     </i>
+     <h3 class="service-title">
+      Color Grading &amp; Effects
+     </h3>
+     <p class="service-desc">
+      Enhance your videos with cinematic color and effects.
+     </p>
+    </article>
+    <article aria-label="YouTube Optimization service" class="service-card" tabindex="0">
+     <i aria-hidden="true" class="fab fa-youtube service-icon">
+     </i>
+     <h3 class="service-title">
+      YouTube Optimization
+     </h3>
+     <p class="service-desc">
+      Thumbnails, metadata, and best practices for growth.
+     </p>
+    </article>
+   </div>
+  </section>
+  <!-- Portfolio Section -->
+  <section aria-labelledby="portfolio-title" class="portfolio" id="portfolio">
+   <h2 id="portfolio-title">
+    Portfolio
+   </h2>
+   <div aria-label="Filter portfolio projects by type" class="filter-chips" role="group">
+    <button aria-pressed="true" class="filter-chip active" type="button">
+     YouTube Videos
+    </button>
+    <button aria-pressed="false" class="filter-chip" type="button">
+     Ads
+    </button>
+    <button aria-pressed="false" class="filter-chip" type="button">
+     Voice Overs
+    </button>
+    <button aria-pressed="false" class="filter-chip" type="button">
+     Before/After
+    </button>
+   </div>
+   <div class="portfolio-grid" role="list">
+    <article aria-label="YouTube video project titled 'How to Edit Like a Pro'" class="portfolio-card" tabindex="0">
+     <img alt="Thumbnail for YouTube video project titled 'How to Edit Like a Pro'" class="portfolio-thumb" height="225" loading="lazy" role="listitem" src="https://storage.googleapis.com/a1aa/image/b31ff789-5fda-4aad-f601-686901e12c06.jpg" width="400"/>
+     <video aria-hidden="true" loop="" muted="" playsinline="" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" tabindex="-1">
+     </video>
+     <div class="portfolio-info">
+      <h3 class="portfolio-title">
+       How to Edit Like a Pro
+      </h3>
+      <div class="portfolio-badges">
+       <span aria-label="Reached 1 million plus views" class="badge">
+        Reached 1M+ views
+       </span>
+       <span aria-label="Testimonial: Amazing work! - Client Name" class="badge">
+        "Amazing work!" - Client Name
+       </span>
+      </div>
+     </div>
+    </article>
+    <article aria-label="Ad project titled 'Brand Launch Campaign'" class="portfolio-card" tabindex="0">
+     <img alt="Thumbnail for ad project titled 'Brand Launch Campaign'" class="portfolio-thumb" height="225" loading="lazy" role="listitem" src="https://storage.googleapis.com/a1aa/image/6d1b78fb-4c9e-4ad8-8552-ec9257b4fec4.jpg" width="400"/>
+     <video aria-hidden="true" loop="" muted="" playsinline="" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" tabindex="-1">
+     </video>
+     <div class="portfolio-info">
+      <h3 class="portfolio-title">
+       Brand Launch Campaign
+      </h3>
+      <div class="portfolio-badges">
+       <span aria-label="Reached 500 thousand views" class="badge">
+        Reached 500K views
+       </span>
+       <span aria-label="Testimonial: Outstanding creativity! - Client Name" class="badge">
+        "Outstanding creativity!" - Client Name
+       </span>
+      </div>
+     </div>
+    </article>
+    <article aria-label="Voice over project titled 'Podcast Intro'" class="portfolio-card" tabindex="0">
+     <img alt="Thumbnail for voice over project titled 'Podcast Intro'" class="portfolio-thumb" height="225" loading="lazy" role="listitem" src="https://storage.googleapis.com/a1aa/image/a5770d22-0f4d-4837-6fa0-330ff4f5a7e7.jpg" width="400"/>
+     <video aria-hidden="true" loop="" muted="" playsinline="" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" tabindex="-1">
+     </video>
+     <div class="portfolio-info">
+      <h3 class="portfolio-title">
+       Podcast Intro
+      </h3>
+      <div class="portfolio-badges">
+       <span aria-label="Testimonial: Perfect tone and clarity! - Client Name" class="badge">
+        "Perfect tone and clarity!" - Client Name
+       </span>
+      </div>
+     </div>
+    </article>
+    <article aria-label="Before and after project titled 'Color Correction Demo'" class="portfolio-card" tabindex="0">
+     <img alt="Thumbnail for before and after project titled 'Color Correction Demo'" class="portfolio-thumb" height="225" loading="lazy" role="listitem" src="https://storage.googleapis.com/a1aa/image/4c8d2300-d7e7-4756-8468-c389ee5a1e77.jpg" width="400"/>
+     <video aria-hidden="true" loop="" muted="" playsinline="" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" tabindex="-1">
+     </video>
+     <div class="portfolio-info">
+      <h3 class="portfolio-title">
+       Color Correction Demo
+      </h3>
+      <div class="portfolio-badges">
+       <span aria-label="Testimonial: Transformed my footage! - Client Name" class="badge">
+        "Transformed my footage!" - Client Name
+       </span>
+      </div>
+     </div>
+    </article>
+   </div>
+  </section>
+  <!-- Testimonials Section -->
+  <section aria-labelledby="testimonials-title" class="testimonials">
+   <h2 id="testimonials-title">
+    What Clients Say
+   </h2>
+   <div aria-atomic="true" aria-live="polite" class="testimonial-slider" role="region">
+    <div class="testimonial-slide active" tabindex="0">
+     <p>
+      "EditFlow transformed my channel with professional edits and voice-overs. Highly recommended!"
+     </p>
+     <div class="testimonial-author">
+      <img alt="Headshot of John Doe" height="48" src="https://storage.googleapis.com/a1aa/image/583a6006-006e-46a5-2998-f6b4be7ddfdd.jpg" width="48"/>
+      <span>
+       John Doe, YouTube Creator
+      </span>
+     </div>
+    </div>
+    <div class="testimonial-slide" tabindex="0">
+     <p>
+      "Amazing work and quick turnaround. My videos have never looked better."
+     </p>
+     <div class="testimonial-author">
+      <img alt="Headshot of Anna Smith" height="48" src="https://storage.googleapis.com/a1aa/image/e2966310-9070-46fe-c8f8-fe6dd8bbc6a5.jpg" width="48"/>
+      <span>
+       Anna Smith, Content Creator
+      </span>
+     </div>
+    </div>
+    <div class="testimonial-slide" tabindex="0">
+     <p>
+      "Professional, creative, and easy to work with. My go-to editor for all projects."
+     </p>
+     <div class="testimonial-author">
+      <img alt="Headshot of Mike Brown" height="48" src="https://storage.googleapis.com/a1aa/image/b959dc91-f0ab-4a41-78be-4acda41d8248.jpg" width="48"/>
+      <span>
+       Mike Brown, Podcaster
+      </span>
+     </div>
+    </div>
+    <button aria-label="Previous testimonial" class="testimonial-arrow left" tabindex="0">
+     <i class="fas fa-chevron-left">
+     </i>
+    </button>
+    <button aria-label="Next testimonial" class="testimonial-arrow right" tabindex="0">
+     <i class="fas fa-chevron-right">
+     </i>
+    </button>
+   </div>
+  </section>
+  <!-- Pricing Section -->
+  <section aria-labelledby="pricing-title" class="pricing" id="pricing">
+   <h2 id="pricing-title">
+    Pricing &amp; Packages
+   </h2>
+   <div class="pricing-grid">
+    <article aria-label="Starter package pricing" class="pricing-card" tabindex="0">
+     <h3 class="pricing-title">
+      Starter
+     </h3>
+     <p class="pricing-price">
+      $199
+     </p>
+     <ul class="pricing-features">
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Up to 5-minute videos
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Basic editing &amp; color correction
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-times-circle">
+       </i>
+       Voice-over services
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-times-circle">
+       </i>
+       Priority support
+      </li>
+     </ul>
+     <button class="btn-select" type="button">
+      Select
+     </button>
+    </article>
+    <article aria-label="Pro package pricing, most popular" class="pricing-card popular" tabindex="0">
+     <h3 class="pricing-title">
+      Pro
+      <span style="font-size: 0.8rem; color: #d8b4fe;">
+       Most Popular
+      </span>
+     </h3>
+     <p class="pricing-price">
+      $499
+     </p>
+     <ul class="pricing-features">
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Up to 20-minute videos
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Advanced editing &amp; effects
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Voice-over &amp; audio mixing
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Priority support
+      </li>
+     </ul>
+     <button class="btn-select" type="button">
+      Select
+     </button>
+    </article>
+    <article aria-label="Enterprise package pricing" class="pricing-card" tabindex="0">
+     <h3 class="pricing-title">
+      Enterprise
+     </h3>
+     <p class="pricing-price">
+      Custom
+     </p>
+     <ul class="pricing-features">
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Unlimited video length
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Full production &amp; post-production
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       Dedicated account manager
+      </li>
+      <li>
+       <i aria-hidden="true" class="fas fa-check-circle">
+       </i>
+       24/7 support
+      </li>
+     </ul>
+     <button class="btn-select" type="button">
+      Contact Us
+     </button>
+    </article>
+   </div>
+  </section>
+  <!-- Contact Section -->
+  <section aria-labelledby="contact-title" class="contact" id="contact">
+   <h2 id="contact-title">
+    Ready to Get Started?
+   </h2>
+   <form action="#" method="POST" novalidate="">
+    <label for="name">
+     Name
+    </label>
+    <input aria-required="true" autocomplete="name" id="name" name="name" required="" type="text"/>
+    <label for="email">
+     Email
+    </label>
+    <input aria-required="true" autocomplete="email" id="email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required="" type="email"/>
+    <label for="message">
+     Message
+    </label>
+    <textarea aria-required="true" id="message" name="message" required="" rows="5"></textarea>
+    <button aria-label="Submit contact form" type="submit">
+     Submit
+    </button>
+   </form>
+  </section>
+  <!-- Footer -->
+  <footer aria-label="Footer with navigation and social links" role="contentinfo">
+   <div class="container">
+    <div class="footer-col">
+     <h3>
+      About EditFlow
+     </h3>
+     <p>
+      Empowering YouTube creators with professional video editing and voice-over services to grow and engage their audience.
+     </p>
+     <p>
+      © 2024 EditFlow. All rights reserved.
+     </p>
+    </div>
+    <div aria-label="Footer navigation" class="footer-col">
+     <h3>
+      Navigation
+     </h3>
+     <a href="#services">
+      Services
+     </a>
+     <a href="#portfolio">
+      Portfolio
+     </a>
+     <a href="#pricing">
+      Pricing
+     </a>
+     <a href="#about">
+      About
+     </a>
+     <a href="#contact">
+      Contact
+     </a>
+    </div>
+    <div aria-label="Social media links" class="footer-col">
+     <h3>
+      Follow Me
+     </h3>
+     <div class="social-icons">
+      <a aria-label="YouTube" href="https://www.youtube.com" rel="noopener" tabindex="0" target="_blank">
+       <i class="fab fa-youtube">
+       </i>
+      </a>
+      <a aria-label="Instagram" href="https://www.instagram.com" rel="noopener" tabindex="0" target="_blank">
+       <i class="fab fa-instagram">
+       </i>
+      </a>
+      <a aria-label="LinkedIn" href="https://www.linkedin.com" rel="noopener" tabindex="0" target="_blank">
+       <i class="fab fa-linkedin">
+       </i>
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script>
+   // Header shrink on scroll
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        header.classList.add("shrink");
+      } else {
+        header.classList.remove("shrink");
+      }
+    });
+
+    // Testimonials carousel
+    const slides = document.querySelectorAll(".testimonial-slide");
+    const prevBtn = document.querySelector(".testimonial-arrow.left");
+    const nextBtn = document.querySelector(".testimonial-arrow.right");
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+    }
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+
+    // Auto-play testimonials every 8 seconds
+    setInterval(nextSlide, 8000);
+
+    // Portfolio filter functionality (basic)
+    const filterChips = document.querySelectorAll(".filter-chip");
+    const portfolioCards = document.querySelectorAll(".portfolio-card");
+
+    filterChips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        filterChips.forEach((c) => {
+          c.classList.remove("active");
+          c.setAttribute("aria-pressed", "false");
+        });
+        chip.classList.add("active");
+        chip.setAttribute("aria-pressed", "true");
+        const filter = chip.textContent.trim().toLowerCase();
+
+        portfolioCards.forEach((card) => {
+          // For demo, show all cards for "all"
+          if (filter === "all") {
+            card.style.display = "";
+          } else {
+            // In real app, filter by data attribute or class
+            // Here just hide cards that don't match filter text in aria-label
+            const label = card.getAttribute("aria-label").toLowerCase();
+            if (label.includes(filter)) {
+              card.style.display = "";
+            } else {
+              card.style.display = "none";
+            }
+          }
+        });
+      });
+    });
+
+    // Fade in animations on scroll
+    const fadeEls = document.querySelectorAll(".fade-in");
+    const fadeInOnScroll = () => {
+      const windowBottom = window.innerHeight;
+      fadeEls.forEach((el) => {
+        const top = el.getBoundingClientRect().top;
+        if (top < windowBottom - 100) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    window.addEventListener("scroll", fadeInOnScroll);
+    window.addEventListener("load", fadeInOnScroll);
+  </script>
+ </body>
+</html>
+<!DOCTYPE html>
